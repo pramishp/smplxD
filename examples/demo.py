@@ -29,12 +29,11 @@ def main(model_folder,
          gender='neutral',
          plot_joints=False,
          num_betas=10,
-         sample_shape=True,
+         sample_shape=False,
          sample_expression=True,
          num_expression_coeffs=10,
          plotting_module='pyrender',
          use_face_contour=False):
-
     model = smplx.create(model_folder, model_type=model_type,
                          gender=gender, use_face_contour=use_face_contour,
                          num_betas=num_betas,
@@ -49,7 +48,8 @@ def main(model_folder,
         expression = torch.randn(
             [1, model.num_expression_coeffs], dtype=torch.float32)
 
-    output = model(betas=betas, expression=expression,
+    offsets = torch.randn((1, 10475, 3)) * 0.01
+    output = model(betas=betas, expression=expression, offsets=offsets,
                    return_verts=True)
     vertices = output.vertices.detach().cpu().numpy().squeeze()
     joints = output.joints.detach().cpu().numpy().squeeze()
