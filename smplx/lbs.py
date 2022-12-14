@@ -162,7 +162,7 @@ def lbs(
         J_regressor: Tensor,
         parents: Tensor,
         lbs_weights: Tensor,
-        offsets: Tensor,
+        offsets: Tensor = None,
         pose2rot: bool = True,
 ) -> Tuple[Tensor, Tensor]:
     ''' Performs Linear Blend Skinning with the given shape and pose parameters

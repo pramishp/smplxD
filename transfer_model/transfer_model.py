@@ -263,6 +263,7 @@ def run_fitting(
 ) -> Dict[str, Tensor]:
     ''' Runs fitting
     '''
+
     vertices = batch['vertices']
     faces = batch['faces']
 
